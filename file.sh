@@ -7,4 +7,4 @@ echo "{" >1.json
 echo "  \"files\": [ " >> 1.json
 awk '{printf "    \"" $1 "\"" }NR<'`cat 2.json | wc -l`' {printf ",\n"}END{printf "\n"}' 2.json >>1.json
 echo "  ]" >>1.json
-echo "}" >>1.json
+echo "}" >> 1.json
