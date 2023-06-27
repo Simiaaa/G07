@@ -1,4 +1,4 @@
-#获取文件夹
+ #获取文件夹
 ls -F | grep "/$"> 1.json
 awk   -F "/"  '{print $1}' 1.json > 2.json
 echo "{" >1.json
