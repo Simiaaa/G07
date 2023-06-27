@@ -20,17 +20,21 @@ export default{
 <style>
 .listurl{
     height: 5%;
+    padding: 5px;
 }
 .folderslist{
     margin-top: 2%;
-    border: 1px solid black;
+    border: 1px solid #DCDFE6;
     border-radius: 4px;
-    height: 23%;
+    height: 33%;
+    background-color: rgba(190, 199, 222, 0.5);
 }
 .fileslist{
     margin-top: 1%;
-    border: 1px solid black;
+    border: 1px solid #DCDFE6;
     border-radius: 4px;
-    height: 65%;
+    height: 50%;
+    background-color: rgba(190, 199, 222, 0.5);
+
 }
 </style>

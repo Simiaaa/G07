@@ -8,3 +8,9 @@
         </el-breadcrumb>
     </div>
 </template>
+<style lang="less">
+.listurl .el-breadcrumb__inner {
+    padding-left: 10px;
+    font-size: 28px;
+}
+</style>

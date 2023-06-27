@@ -17,24 +17,24 @@
   <style>
 .left {
   position: absolute;
-  width: 700px;
-  background-color: #ffffff;
+  width: 60%;
+  background-color: #F2F6FC;
   left: 0px;
   top: 0px;
   bottom: 0px;
-  padding: 30px;
+  padding: 3%;
   overflow-y: auto;
-  border-right: 1px black solid;
 }
 .right {
   position: absolute;
-  /*     background-color: #1e2020; */
-  left: 760px;
+  background-color: rgba(190, 199, 222, 0.5);
+  left: 66%;
   right: 0px;
   bottom: 0px;
   top:0px;
   padding: 10px;
   overflow-y: auto;
+  box-shadow: inset 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 }
   </style>
   
