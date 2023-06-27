@@ -1,5 +1,17 @@
 <template>
     <div class="fileslist">
+      <div class="list">
+        <ul v-for="li in 50" :key="li">
+          <li>
+            <span>
+              <img src="@/assets/PDF.png" width="25px">
+              备选项.pdf</span>
+              <!-- <span>
+              <img src="@/assets/word.png" width="25px">
+              文档.docx</span> -->
+          </li>
+        </ul>
+      </div>
       <div class="input">
         <el-input
             placeholder="请输入关键词"
@@ -8,19 +20,6 @@
             </el-input>
             <el-button class="inputBtn" type="primary" icon="el-icon-search">搜索</el-button>
       </div>
-      <div class="list">
-        <ul v-for="li in 50" :key="li">
-          <li>
-            <el-checkbox v-model="checked">
-              <img src="@/assets/PDF.png" width="25px">
-              备选项.pdf</el-checkbox>
-              <el-checkbox v-model="checked">
-              <img src="@/assets/word.png" width="25px">
-              文档.docx</el-checkbox>
-          </li>
-        </ul>
-      </div>
-      <el-button type="primary" plain>保存结果</el-button>
     </div>
 </template>
 <script>
@@ -47,15 +46,6 @@
 .input .el-input__inner{
   border-radius: 4px 0px 0px 4px;
   border-width: 0px;
-}
-
-.input .el-button{
-  border-radius: 0px 4px 4px 0px;
-}
-
-.fileslist .el-button--primary.is-plain{
-  color: #FFF;
-  background-color: #409EFF;
 }
 
 .list{
