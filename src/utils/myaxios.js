@@ -1,24 +1,24 @@
 import axios from "axios";
-import {Loading,Message} from 'element-ui';
+import { Loading, Message } from "element-ui";
 
 const loading = {
-  loadingInstance:null,
-  open:function(){
-    if(this.loadingInstance===null){
-      this.loadingInstance=Loading.service({
-        target:'.main',
-        text:'玩命加载中',
-        background:'rgba(0,0,0,0.5)'
-      })
+  loadingInstance: null,
+  open: function() {
+    if (this.loadingInstance === null) {
+      this.loadingInstance = Loading.service({
+        target: ".main",
+        text: "玩命加载中",
+        background: "rgba(0,0,0,0.5)"
+      });
     }
   },
-  close:function(){
-    if(this.loadingInstance!=null){
+  close: function() {
+    if (this.loadingInstance != null) {
       this.loadingInstance.close();
     }
-    this.loadingInstance=null
+    this.loadingInstance = null;
   }
-}
+};
 
 //改进并封装原生的axios
 const myaxios = axios.create({
@@ -46,14 +46,14 @@ myaxios.interceptors.response.use(
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     loading.close();
-    const resp = response.data
-    if(resp.code!=200){
+    const resp = response.data;
+    if (resp.code != 200) {
       Message({
-        message:resp.message,
-        type:'warning',
-        duration:5000,
-        showClose:true
-      })
+        message: resp.message,
+        type: "warning",
+        duration: 5000,
+        showClose: true
+      });
     }
     return response;
   },
@@ -62,10 +62,10 @@ myaxios.interceptors.response.use(
     // 对响应错误做点什么
     loading.close();
     Message({
-      message:error.message,
-      type:'error',
-      duration:5000
-    })
+      message: error.message,
+      type: "error",
+      duration: 5000
+    });
     return Promise.reject(error);
   }
 );

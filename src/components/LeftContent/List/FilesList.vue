@@ -1,68 +1,71 @@
 <template>
-    <div class="fileslist">
-      <div class="list">
-        <ul v-for="li in 50" :key="li">
-          <li>
-            <span>
-              <img src="@/assets/PDF.png" width="25px">
-              备选项.pdf</span>
-              <!-- <span>
+  <div class="fileslist">
+    <div class="list">
+      <ul v-for="li in 50" :key="li">
+        <li>
+          <span>
+            <img src="@/assets/PDF.png" width="25px" />
+            备选项.pdf</span
+          >
+          <!-- <span>
               <img src="@/assets/word.png" width="25px">
               文档.docx</span> -->
-          </li>
-        </ul>
-      </div>
-      <div class="input">
-        <el-input
-            placeholder="请输入关键词"
-            prefix-icon="el-icon-search"
-            v-model="keywords">
-            </el-input>
-            <el-button class="inputBtn" type="primary" icon="el-icon-search">搜索</el-button>
-      </div>
+        </li>
+      </ul>
     </div>
+    <div class="input">
+      <el-input
+        placeholder="请输入关键词"
+        prefix-icon="el-icon-search"
+        v-model="keywords"
+      >
+      </el-input>
+      <el-button class="inputBtn" type="primary" icon="el-icon-search"
+        >搜索</el-button
+      >
+    </div>
+  </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        keywords:"",
-      };
-    }
-  };
+export default {
+  data() {
+    return {
+      keywords: ""
+    };
+  }
+};
 </script>
 <style lang="less">
-.fileslist{
+.fileslist {
   display: flex;
   flex-direction: column;
-  justify-content:space-around; 
+  justify-content: space-around;
 }
-.input{
+.input {
   display: flex;
   margin: 10px;
-  flex-direction:row;
+  flex-direction: row;
 }
 
-.input .el-input__inner{
+.input .el-input__inner {
   border-radius: 4px 0px 0px 4px;
   border-width: 0px;
 }
 
-.list{
+.list {
   overflow: auto;
 }
 
-.list .el-checkbox__label{
+.list .el-checkbox__label {
   font-size: 20px;
 }
-ul li{
-    list-style: none;
-    float: left;
-    margin-left: 30px;
+ul li {
+  list-style: none;
+  float: left;
+  margin-left: 30px;
 }
-ul li img{
+ul li img {
   display: inline-block;
-  vertical-align:bottom;
+  vertical-align: bottom;
 }
 </style>
-

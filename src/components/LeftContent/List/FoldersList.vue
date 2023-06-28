@@ -1,66 +1,152 @@
 <template>
-    <div class="folderslist" >
-        <div class="content" v-for="folder in firstFoldersLength" :key="folder">
-            <div class="block" id="folder" @click="selectFolder()">
-                <img src="@/assets/24gf-folderOpen.png" width="40px">
-                <span class="demonstration">{{ firstFolders[folder-1] }}</span>
-            </div>
-        </div>
+  <div class="folders">
+    <div class="folderslist">
+      <ul>
+        <li class="content" v-for="folder in folders" :key="folder.id">
+          <div
+            class="block"
+            id="folder"
+            @click.stop="selectFolder(folder)"
+            :class="{ 'active-folder': isFolderActive }"
+          >
+            <img src="@/assets/24gf-folderOpen.png" width="40px" />
+            <span class="demonstration">{{ folder.name }}</span>
+          </div>
+          <ul v-if="folder.expanded">
+            <li
+              v-for="subFolder in folder.folders"
+              :key="subFolder.id"
+              :class="{ 'checked-folder': isFolderChecked(subFolder) }"
+            >
+              <div class="block" id="subFolder" @click="checkFolder(subFolder)">
+                <img src="@/assets/24gf-folderOpen.png" width="40px" />
+                <span class="demonstration">{{ subFolder.name }}</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
+    <div class="btn">
+      <el-button
+        type="primary"
+        class="sureBtn"
+        v-if="isFolderActive"
+        @click="saveSelectedFolder"
+        :disabled="isNoFolderChecked"
+        >确定</el-button
+      >
+      <el-button
+        type="primary"
+        class="backBtn"
+        v-if="isSecondLevel"
+        @click="goToFirstLevel()"
+        >返回</el-button
+      >
+    </div>
+  </div>
 </template>
 <script>
-import ForderListApi from "@/api/getFordersList.js";
-export default{
-data(){
-    return{
-        totalData:[],
-        firstFolders:[],
-        firstFoldersLength:0,
-        secondFolders:[],
-        secondFoldersLength:0,
-    }
-},
-created(){
-    this.getFordersList()
-},
-methods:{
-    getFordersList(){
-        ForderListApi
-        .getFordersList()
-        .then(response => {
-          const resp = response.data.folders;
-          console.log(resp);
-          console.log(resp.length);
-          this.totalData=resp;
-          resp.forEach((value,index) => {
-            this.firstFolders[index]=value.name;
-          });
-          this.firstFoldersLength=resp.length;
-        }).catch(error=>{
-            console.log(error.message)
-        })
+export default {
+  data() {
+    return {
+      activeFolderId: null,
+      checkedFolderId: null,
+      isSecondLevel: false,
+      selectedFolderName: "",
+      parentFolderName: ""
+    };
+  },
+  created() {
+    this.getFoldersList();
+  },
+  methods: {
+    getFoldersList() {
+      this.$store.dispatch("fetchFolders");
+      this.$nextTick(() => {
+        console.log(this.$store.state.folders);
+      });
     },
-    selectFolder(){
-        
+    selectFolder(folder) {
+      folder.expanded = !folder.expanded;
+      this.activeFolderId = folder.expanded ? folder.id : null;
+      this.isSecondLevel = folder.expanded;
+      this.updateFolderStatus(folder);
+    },
+    checkFolder(subFolder) {
+      subFolder.checked = !subFolder.checked;
+      this.checkedFolderId = subFolder.checked ? subFolder : null;
+    },
+    goToFirstLevel() {
+      this.isSecondLevel = false;
+      this.updateFolderStatus(null);
+      this.checkedFolderId = null;
+    },
+    updateFolderStatus(selectedFolder) {
+      this.folders.forEach(folder => {
+        folder.expanded = folder === selectedFolder;
+      });
+    },
+    saveSelectedFolder() {
+      const parentFolder = this.folders.find(folder => folder.expanded);
+      console.log(parentFolder);
+      if (parentFolder) {
+        this.parentFolderName = parentFolder.name;
+        const selectedFolder = parentFolder.folders.find(
+          subFolder => subFolder.checked
+        );
+        this.selectedFolderName = selectedFolder.name;
+      }
+      console.log(this.selectedFolderName, this.parentFolderName);
     }
-}
-}
+  },
+  computed: {
+    folders() {
+      return this.$store.state.folders.folders;
+    },
+    isFolderActive() {
+      return this.folders.find(folder => folder.expanded);
+    },
+    isFolderChecked() {
+      return subFolder => subFolder === this.checkedFolderId;
+    },
+    isNoFolderChecked() {
+      /* return this.folders.every((folder) => {
+        return !folder.folders.some((subFolder) => subFolder.checked);
+      }); */
+      return !this.checkedFolderId;
+    }
+  }
+};
 </script>
 <style>
-.folderslist{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-    padding: 20px;
-    overflow: auto;
+.folderslist {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  padding: 20px;
+  overflow: auto;
 }
-.block{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    font-size: small;
+.block {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  align-items: center;
 }
+.active-folder {
+  display: none;
+}
+.checked-folder {
+  background-color: grey;
+}
+.folderslist ul li {
+  margin-left: 0px;
+}
+/* .folders .btn{
+  left: 50%;
+} */
 </style>
