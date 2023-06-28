@@ -16,7 +16,8 @@ echo "        \"name\": \""$i"\"">> folders.json
 #输出该文件下根目录
 echo "        \"folders\": [ " >> folders.json
 echo "          {">> folders.json
-find /$i -type d |awk -F "/" '{print $3 }'|sort -n |uniq > folders.txt
+find /$i -type d |awk -F "/" '{print $3 }'|sort -n |uniq > 1.txt
+cat 1.txt|sed -e '/^$/d' > 2.txt
 cat  folders.txt|tr -s '\n'
 awk   -F "/"  '{print $1}' 1.json > 2.json
 awk '{printf "    \"" $1 "\"" }NR<'`cat 2.json | wc -l`' {printf ",\n"}END{printf "\n"}' 2.json >>1.json
