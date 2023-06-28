@@ -19,8 +19,9 @@ echo "          {">> folders.json
 find /$i -type d |awk -F "/" '{print $3 }'|sort -n |uniq > 1.txt
 cat 1.txt|sed -e '/^$/d' > 2.txt
 cat  folders.txt|tr -s '\n'
-awk '{print "          {"}{printf "            \"id\":"NR}' 2.txt >> folders.json
-awk '{printf "    \"" $1 "\"" }NR<'`cat 2.json | wc -l`' {printf ",\n"}END{printf "\n"}' 2.txt >>1.txts
+awk '{print "          {"}{print"            \"id\":"NR","}
+{print"            \"name\": \""$1"\""}{print "          }"}' 2.txt
+ >> folders.json
 if [ $a -eq $count ]
 then echo "    }">> folders.json
 else echo "    },">> folders.json
