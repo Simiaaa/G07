@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 指定的文件夹路径
-directory="/root/folder1"  
+directory=$1
 
 # 获取文件夹下的Word和PDF文件，并保存到file.txt
 ls -RF "$directory" | grep -v "/" | sed -e '/^$/d' > file.txt
