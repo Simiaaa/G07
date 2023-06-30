@@ -8,7 +8,7 @@ const loading = {
       this.loadingInstance = Loading.service({
         target: ".main",
         text: "玩命加载中",
-        background: "rgba(0,0,0,0.5)"
+        background: "rgba(255,255,255,1)"
       });
     }
   },
@@ -22,8 +22,8 @@ const loading = {
 
 //改进并封装原生的axios
 const myaxios = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  baseURL: process.env.VUE_APP_BASE_API
+  /* timeout: 5000 */
 });
 
 // 添加请求拦截器
@@ -46,15 +46,15 @@ myaxios.interceptors.response.use(
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     loading.close();
-    const resp = response.data;
-    if (resp.code != 200) {
+    /*     const resp = response.data; */
+    /*     if (resp.code != 200) {
       Message({
         message: resp.message,
         type: "warning",
         duration: 5000,
         showClose: true
       });
-    }
+    } */
     return response;
   },
   function(error) {

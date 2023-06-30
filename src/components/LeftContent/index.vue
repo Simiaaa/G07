@@ -5,7 +5,7 @@
     <files-list></files-list>
   </div>
 </template>
-<script>
+<script type="text/javascript">
 import ListUrl from "@/components/LeftContent/List/ListURL.vue";
 import Folders from "@/components/LeftContent/List/FoldersList.vue";
 import FilesList from "@/components/LeftContent/List/FilesList.vue";

@@ -30,18 +30,18 @@
     <div class="btn">
       <el-button
         type="primary"
+        class="backBtn"
+        v-if="isSecondLevel"
+        @click="goToFirstLevel()"
+        >返回</el-button
+      >
+      <el-button
+        type="primary"
         class="sureBtn"
         v-if="isFolderActive"
         @click="saveSelectedFolder"
         :disabled="isNoFolderChecked"
         >确定</el-button
-      >
-      <el-button
-        type="primary"
-        class="backBtn"
-        v-if="isSecondLevel"
-        @click="goToFirstLevel()"
-        >返回</el-button
       >
     </div>
   </div>
@@ -63,9 +63,6 @@ export default {
   methods: {
     getFoldersList() {
       this.$store.dispatch("fetchFolders");
-      this.$nextTick(() => {
-        console.log(this.$store.state.folders);
-      });
     },
     selectFolder(folder) {
       folder.expanded = !folder.expanded;
@@ -89,7 +86,6 @@ export default {
     },
     saveSelectedFolder() {
       const parentFolder = this.folders.find(folder => folder.expanded);
-      console.log(parentFolder);
       if (parentFolder) {
         this.parentFolderName = parentFolder.name;
         const selectedFolder = parentFolder.folders.find(
@@ -97,7 +93,10 @@ export default {
         );
         this.selectedFolderName = selectedFolder.name;
       }
-      console.log(this.selectedFolderName, this.parentFolderName);
+      this.$store.dispatch(
+        "fetchFiles",
+        "/" + this.parentFolderName + "/" + this.selectedFolderName
+      );
     }
   },
   computed: {
@@ -119,7 +118,7 @@ export default {
   }
 };
 </script>
-<style>
+<style type="text/javascript">
 .folderslist {
   display: flex;
   flex-direction: row;
@@ -144,6 +143,7 @@ export default {
   background-color: grey;
 }
 .folderslist ul li {
+  float: left;
   margin-left: 0px;
 }
 /* .folders .btn{

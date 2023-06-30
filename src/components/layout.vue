@@ -4,7 +4,7 @@
     <right-content></right-content>
   </div>
 </template>
-<script>
+<script type="text/javascript">
 import LeftContent from "@/components/LeftContent";
 import RightContent from "@/components/RightContent";
 export default {

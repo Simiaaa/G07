@@ -12,11 +12,12 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           //'^/dev-apis':''
-          ["^" + process.env.VUE_APP_BASE_API]: ""
-        }
-      }
-    }
+          ["^" + process.env.VUE_APP_BASE_API]: "",
+        },
+      },
+    },
   },
+  publicPath:"/",
   lintOnSave: false, //关闭格式检查
-  productionSourceMap: false //打包时不生成.map文件，加快打包速度
+  productionSourceMap: false, //打包时不生成.map文件，加快打包速度
 };

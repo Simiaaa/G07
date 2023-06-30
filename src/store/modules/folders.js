@@ -1,5 +1,5 @@
 import types from "../types";
-import ForderListApi from "@/api/getFordersList.js";
+import FolderListApi from "@/api/getFoldersList.js";
 const state = {
   folders: []
 };
@@ -13,19 +13,11 @@ const mutations = {
 
 const actions = {
   fetchFolders({ commit }) {
-    ForderListApi.getFordersList()
-      .then(response => {
-        const folders = response.data.folders;
-        console.log(folders);
-        commit("SET_FOLDERS", folders);
-      })
-      .catch(error => {
-        console.log(error.message);
-        this.$message({
-          message: error.message,
-          type: "warning"
-        });
-      });
+    FolderListApi.getFoldersList().then(response => {
+      const folders = response.data.folders;
+      console.log(folders);
+      commit("SET_FOLDERS", folders);
+    });
   }
 };
 
