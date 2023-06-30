@@ -1,12 +1,9 @@
 #!/bin/bash
-
 # 指定包含要检索文件的文件夹路径
-directory="/root/folder1"  
+directory=$2
 # 指定要搜索的关键词
-keyword="算法" 
-
+keyword=$1 
 declare -A results
-
 search_files() {
     local file_path="$1"
     # 提取文件扩展名
@@ -46,12 +43,9 @@ search_files() {
         done
     fi
 }
-
 # 清空旧的 Line.json 文件
 > Line.json
-
 search_files "$directory"
-
 # 将结果写入 Line.json 文件
 echo "{" > Line.json
 echo "  \"files\": [" >> Line.json
@@ -72,3 +66,4 @@ for file_path in "${!results[@]}"; do
 done
 echo "  ]" >> Line.json
 echo "}" >> Line.json
+
