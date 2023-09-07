@@ -1,22 +1,10 @@
-# G07
 
-# 暑假实训
+- Language: Shell/python
+- Database: file
+- Page: H5/CSS/JS/VUE
+- Server: NGINX
 
-# 答辩要求
-
-- online: 给出访问域名地址 `url`
-- PPT & 演示 (5 分钟)
-- 答辩时分别展示：PPT、功能、性能、内存，并且给出源代码地址
-
-# 技术要求
-
-- Language: JAVA/C/GO/Shell/nodejs/python ...
-- Database: file/mysql/mongodb ...
-- Page: H5/CSS/JS/VUE/REACT ...
-- Server: FTP/APACHE/NGINX/GIT ...
-
-# 项目命题
-
+  
 要求实现一个 APP 文件检索系统，具体描述如下：
 
 1. 选择硬盘一个文件夹作为查询的目录，此时将该目录下的所有检索文件 `pdf`/`word` 建立索引，保存到数据库中；
